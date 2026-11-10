@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Profil | LepszyUSOS{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        {% if user.czeka_na_zatwierdzenie %}
+            <div class="alert alert-warning"><i class="bi bi-hourglass-split"></i> Twoje konto prowadzącego czeka na zatwierdzenie przez administratora.</div>
+        {% endif %}
+        <div class="card shadow-sm">
+            <div class="card-header bg-white"><h1 class="h5 mb-0">Mój profil</h1></div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-sm-4">Login</dt><dd class="col-sm-8">{{ user.username }}</dd>
+                    <dt class="col-sm-4">Imię i nazwisko</dt><dd class="col-sm-8">{{ user.get_full_name|default:'-' }}</dd>
+                    <dt class="col-sm-4">E-mail</dt><dd class="col-sm-8">{{ user.email|default:'-' }}</dd>
+                    <dt class="col-sm-4">Rola</dt>
+                    <dd class="col-sm-8">{% if user.is_superuser %}Administrator{% else %}{{ user.get_role_display }}{% endif %}</dd>
+                    {% if user.is_student %}
+                        <dt class="col-sm-4">Numer albumu</dt><dd class="col-sm-8">{{ user.nr_albumu|default:'-' }}</dd>
+                    {% endif %}
+                    <dt class="col-sm-4">Konto od</dt><dd class="col-sm-8">{{ user.date_joined|date:'d.m.Y' }}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

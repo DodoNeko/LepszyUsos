@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="p-5 mb-4 bg-white rounded-3 shadow-sm">
+    <h1 class="display-6 fw-semibold">LepszyUSOS</h1>
+    <p class="lead">Przedmioty, terminy zaliczeń i oceny w jednym miejscu.</p>
+    {% if user.is_authenticated %}
+        <a class="btn btn-primary" href="{% url 'profil' %}">Mój profil</a>
+    {% else %}
+        <a class="btn btn-primary me-2" href="{% url 'login' %}">Zaloguj się</a>
+        <a class="btn btn-outline-primary" href="{% url 'rejestracja' %}">Załóż konto</a>
+    {% endif %}
+</div>
+{% endblock %}
