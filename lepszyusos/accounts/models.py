@@ -32,7 +32,8 @@ class User(AbstractUser):
 
     @property
     def is_student(self):
-        return self.role == self.Role.STUDENT
+        # administrator ma domyślną rolę w bazie, ale nie jest studentem
+        return self.role == self.Role.STUDENT and not self.is_superuser
 
     @property
     def is_prowadzacy(self):
